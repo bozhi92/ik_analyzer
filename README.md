@@ -22,3 +22,14 @@ if (Boolean.valueOf(singleton.jdbcProps.getProperty(ENABLE_DICT))) {
 
 ### 可能遇到的问题
 因为jdk安全策略 启动elasticsearch时可能会报一些无权限的错误 需要修改一下java.policy中的配置 
+jdk/jre/lib/security/java.policy
+添加
+```
+    permission java.util.PropertyPermission "*", "read,write";
+    permission java.lang.RuntimePermission "getClassLoader";
+    permission javax.management.MBeanServerPermission "createMBeanServer";
+    permission java.lang.RuntimePermission "setContextClassLoader";
+    permission javax.management.MBeanTrustPermission "register";
+    permission java.net.SocketPermission "*", "connect,resolve";
+    permission javax.management.MBeanPermission "*", "registerMBean";
+```
